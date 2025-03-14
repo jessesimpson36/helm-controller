@@ -20,10 +20,10 @@ import (
 	"context"
 	"fmt"
 
-	helmaction "helm.sh/helm/v3/pkg/action"
-	helmchart "helm.sh/helm/v3/pkg/chart"
-	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
-	helmrelease "helm.sh/helm/v3/pkg/release"
+	helmaction "github.com/jessesimpson36/helm/v4/pkg/action"
+	helmchart "github.com/jessesimpson36/helm/v4/pkg/chart/v2"
+	helmchartutil "github.com/jessesimpson36/helm/v4/pkg/chart/v2/util"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
 
 	v2 "github.com/fluxcd/helm-controller/api/v2"
 	"github.com/fluxcd/helm-controller/internal/features"

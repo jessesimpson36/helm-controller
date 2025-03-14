@@ -20,12 +20,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
 
 	"github.com/fluxcd/pkg/apis/meta"
 	"github.com/fluxcd/pkg/runtime/conditions"
 	"github.com/fluxcd/pkg/ssa/jsondiff"
-	"helm.sh/helm/v3/pkg/kube"
-	helmrelease "helm.sh/helm/v3/pkg/release"
+	"github.com/jessesimpson36/helm/v4/pkg/kube"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/fluxcd/helm-controller/internal/action"
@@ -136,7 +137,7 @@ func DetermineReleaseState(ctx context.Context, cfg *action.ConfigFactory, req *
 		return ReleaseState{Status: ReleaseStatusAbsent, Reason: "found uninstalled release in storage"}, nil
 	case helmrelease.StatusDeployed:
 		// Verify the release is in sync with the desired configuration.
-		if err = action.VerifyRelease(rls, cur, req.Chart.Metadata, req.Values); err != nil {
+		if err = action.VerifyRelease(rls, cur, req.Chart.Metadata, helmchartutil.Values(req.Values)); err != nil {
 			switch err {
 			case action.ErrChartChanged, action.ErrConfigDigest:
 				return ReleaseState{Status: ReleaseStatusOutOfSync, Reason: err.Error()}, nil

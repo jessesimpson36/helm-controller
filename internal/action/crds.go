@@ -22,10 +22,10 @@ import (
 	"fmt"
 	"time"
 
-	helmaction "helm.sh/helm/v3/pkg/action"
-	helmchart "helm.sh/helm/v3/pkg/chart"
-	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
-	helmkube "helm.sh/helm/v3/pkg/kube"
+	helmaction "github.com/jessesimpson36/helm/v4/pkg/action"
+	helmchart "github.com/jessesimpson36/helm/v4/pkg/chart/v2"
+	helmchartutil "github.com/jessesimpson36/helm/v4/pkg/chart/v2/util"
+	helmkube "github.com/jessesimpson36/helm/v4/pkg/kube"
 	apiextension "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	apimeta "k8s.io/apimachinery/pkg/api/meta"
@@ -77,7 +77,7 @@ func applyCRDs(cfg *helmaction.Configuration, policy v2.CRDsPolicy, chrt *helmch
 		return nil
 	}
 
-	if err := helmchartutil.ProcessDependenciesWithMerge(chrt, vals); err != nil {
+	if err := helmchartutil.ProcessDependencies(chrt, vals); err != nil {
 		return fmt.Errorf("failed to process chart dependencies: %w", err)
 	}
 

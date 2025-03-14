@@ -19,6 +19,7 @@ package reconcile
 import (
 	"context"
 	"fmt"
+	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
 	"strings"
 
 	corev1 "k8s.io/api/core/v1"
@@ -144,7 +145,7 @@ func (r *Upgrade) failure(req *Request, buffer *action.LogBuffer, err error) {
 	// Condition summary.
 	r.eventRecorder.AnnotatedEventf(
 		req.Object,
-		eventMeta(req.Chart.Metadata.Version, chartutil.DigestValues(digest.Canonical, req.Values).String(),
+		eventMeta(req.Chart.Metadata.Version, chartutil.DigestValues(digest.Canonical, helmchartutil.Values(req.Values)).String(),
 			addAppVersion(req.Chart.AppVersion()), addOCIDigest(req.Object.Status.LastAttemptedRevisionDigest)),
 		corev1.EventTypeWarning,
 		v2.UpgradeFailedReason,

@@ -19,6 +19,7 @@ package reconcile
 import (
 	"context"
 	"fmt"
+	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
 	"strings"
 
 	"github.com/fluxcd/pkg/runtime/logger"
@@ -154,7 +155,7 @@ func (r *Install) failure(req *Request, buffer *action.LogBuffer, err error) {
 	// Condition summary.
 	r.eventRecorder.AnnotatedEventf(
 		req.Object,
-		eventMeta(req.Chart.Metadata.Version, chartutil.DigestValues(digest.Canonical, req.Values).String(),
+		eventMeta(req.Chart.Metadata.Version, chartutil.DigestValues(digest.Canonical, helmchartutil.Values(req.Values)).String(),
 			addAppVersion(req.Chart.AppVersion()), addOCIDigest(req.Object.Status.LastAttemptedRevisionDigest)),
 		corev1.EventTypeWarning,
 		v2.InstallFailedReason,

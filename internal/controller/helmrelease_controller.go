@@ -20,10 +20,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	helmchartutil "github.com/jessesimpson36/helm/v4/pkg/chart/v2/util"
 	"strings"
 	"time"
 
-	"helm.sh/helm/v3/pkg/chart"
+	chart "github.com/jessesimpson36/helm/v4/pkg/chart/v2"
 	corev1 "k8s.io/api/core/v1"
 	apiequality "k8s.io/apimachinery/pkg/api/equality"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -422,7 +423,7 @@ func (r *HelmReleaseReconciler) reconcileRelease(ctx context.Context, patchHelpe
 	if err = intreconcile.NewAtomicRelease(patchHelper, cfg, r.EventRecorder, r.FieldManager).Reconcile(ctx, &intreconcile.Request{
 		Object: obj,
 		Chart:  loadedChart,
-		Values: values,
+		Values: helmchartutil.Values(values),
 	}); err != nil {
 		if errors.Is(err, intreconcile.ErrMustRequeue) {
 			return ctrl.Result{Requeue: true}, nil

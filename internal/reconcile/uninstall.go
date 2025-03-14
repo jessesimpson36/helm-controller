@@ -22,8 +22,8 @@ import (
 	"fmt"
 	"strings"
 
-	helmrelease "helm.sh/helm/v3/pkg/release"
-	helmdriver "helm.sh/helm/v3/pkg/storage/driver"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
+	helmdriver "github.com/jessesimpson36/helm/v4/pkg/storage/driver"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/tools/record"
 	ctrl "sigs.k8s.io/controller-runtime"

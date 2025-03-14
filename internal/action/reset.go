@@ -18,7 +18,7 @@ package action
 
 import (
 	"github.com/opencontainers/go-digest"
-	"helm.sh/helm/v3/pkg/chart"
+	chart "github.com/jessesimpson36/helm/v4/pkg/chart/v2"
 	"helm.sh/helm/v3/pkg/chartutil"
 
 	v2 "github.com/fluxcd/helm-controller/api/v2"

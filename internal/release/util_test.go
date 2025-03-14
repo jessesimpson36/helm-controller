@@ -20,7 +20,7 @@ import (
 	"testing"
 
 	. "github.com/onsi/gomega"
-	helmrelease "helm.sh/helm/v3/pkg/release"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
 
 	"github.com/fluxcd/helm-controller/internal/testutil"
 )

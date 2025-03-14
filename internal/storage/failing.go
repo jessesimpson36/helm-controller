@@ -17,8 +17,8 @@ limitations under the License.
 package storage
 
 import (
-	"helm.sh/helm/v3/pkg/release"
-	"helm.sh/helm/v3/pkg/storage/driver"
+	release "github.com/jessesimpson36/helm/v4/pkg/release/v1"
+	"github.com/jessesimpson36/helm/v4/pkg/storage/driver"
 )
 
 const (

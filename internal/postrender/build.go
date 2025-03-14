@@ -20,7 +20,7 @@ import (
 	"encoding/json"
 
 	"github.com/opencontainers/go-digest"
-	helmpostrender "helm.sh/helm/v3/pkg/postrender"
+	helmpostrender "github.com/jessesimpson36/helm/v4/pkg/postrender"
 
 	v2 "github.com/fluxcd/helm-controller/api/v2"
 )

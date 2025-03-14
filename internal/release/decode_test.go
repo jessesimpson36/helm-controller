@@ -23,7 +23,7 @@ import (
 	"encoding/json"
 	"io"
 
-	rspb "helm.sh/helm/v3/pkg/release"
+	rspb "github.com/jessesimpson36/helm/v4/pkg/release/v1"
 )
 
 var (

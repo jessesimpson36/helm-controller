@@ -19,9 +19,10 @@ package reconcile
 import (
 	"context"
 	"fmt"
+	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
 	"strings"
 
-	helmrelease "helm.sh/helm/v3/pkg/release"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/tools/record"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -143,7 +144,7 @@ func (r *RollbackRemediation) failure(req *Request, prev *v2.Snapshot, buffer *a
 	// Condition summary.
 	r.eventRecorder.AnnotatedEventf(
 		req.Object,
-		eventMeta(prev.ChartVersion, chartutil.DigestValues(digest.Canonical, req.Values).String(),
+		eventMeta(prev.ChartVersion, chartutil.DigestValues(digest.Canonical, helmchartutil.Values(req.Values)).String(),
 			addAppVersion(prev.AppVersion), addOCIDigest(prev.OCIDigest)),
 		corev1.EventTypeWarning,
 		v2.RollbackFailedReason,
@@ -163,7 +164,7 @@ func (r *RollbackRemediation) success(req *Request, prev *v2.Snapshot) {
 	// Record event.
 	r.eventRecorder.AnnotatedEventf(
 		req.Object,
-		eventMeta(prev.ChartVersion, chartutil.DigestValues(digest.Canonical, req.Values).String(),
+		eventMeta(prev.ChartVersion, chartutil.DigestValues(digest.Canonical, helmchartutil.Values(req.Values)).String(),
 			addAppVersion(prev.AppVersion), addOCIDigest(prev.OCIDigest)),
 		corev1.EventTypeNormal,
 		v2.RollbackSucceededReason,

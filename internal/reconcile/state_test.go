@@ -22,11 +22,11 @@ import (
 	"testing"
 
 	. "github.com/onsi/gomega"
-	helmchart "helm.sh/helm/v3/pkg/chart"
-	helmchartutil "helm.sh/helm/v3/pkg/chartutil"
-	helmrelease "helm.sh/helm/v3/pkg/release"
-	helmstorage "helm.sh/helm/v3/pkg/storage"
-	helmdriver "helm.sh/helm/v3/pkg/storage/driver"
+	helmchart "github.com/jessesimpson36/helm/v4/pkg/chart/v2"
+	helmchartutil "github.com/jessesimpson36/helm/v4/pkg/chart/v2/util"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
+	helmstorage "github.com/jessesimpson36/helm/v4/pkg/storage"
+	helmdriver "github.com/jessesimpson36/helm/v4/pkg/storage/driver"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 

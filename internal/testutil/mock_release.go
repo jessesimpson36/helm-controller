@@ -19,7 +19,7 @@ package testutil
 import (
 	"fmt"
 
-	helmrelease "helm.sh/helm/v3/pkg/release"
+	helmrelease "github.com/jessesimpson36/helm/v4/pkg/release/v1"
 )
 
 // ReleaseOptions is a helper to build a Helm release mock.

@@ -24,8 +24,8 @@ import (
 
 	sourcev1 "github.com/fluxcd/source-controller/api/v1"
 	"github.com/opencontainers/go-digest"
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/chartutil"
+	"github.com/jessesimpson36/helm/v4/pkg/chart/v2"
+	"github.com/jessesimpson36/helm/v4/pkg/chart/v2/util"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/rand"
 )
